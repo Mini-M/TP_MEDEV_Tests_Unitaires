@@ -2,7 +2,7 @@
 #include <string>
 #include "structures_jeu.h"
 
-Class Joueur
+class Joueur
 {
 private :
     int couleur;

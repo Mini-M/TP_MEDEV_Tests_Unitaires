@@ -19,7 +19,14 @@ void Joueur :: jouer (Goban plateau)
 
     if (action=="jouer")
     {
+    int x,y;
+    cout<<"Entrer les coordonnees de la pierre"<<endl;
+    cin>>x>>y;
     //a completer
+    if (size(plateau[x][y])==1)
+        {
+        cout<<"Case occupee"<<endl;
+        }
     }
     else if (action=="passer")
     {
