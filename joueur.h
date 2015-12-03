@@ -1,5 +1,6 @@
 
 #include <string>
+#include "structures_jeu.h"
 
 Class Joueur
 {
@@ -10,7 +11,10 @@ private :
 public :
     Joueur(int color);
     ~Joueur();
-    void jouer ();
-    //Board* plateau;
+    void jouer (Goban plateau);
+
+    //Fonctions de récupération
+    int getColor();
+
 
 };
