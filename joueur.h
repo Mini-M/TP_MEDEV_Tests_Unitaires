@@ -13,6 +13,7 @@ private :
     int couleur;
     int captures;
     float points;
+    bool aPasse;
 public :
     Joueur(int color);
     ~Joueur();
@@ -20,6 +21,7 @@ public :
 
     //Fonctions de récupération
     int getColor();
+    bool getPasse();
 
 
 };

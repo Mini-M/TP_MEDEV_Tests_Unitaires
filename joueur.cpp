@@ -51,3 +51,8 @@ void Joueur :: jouer (Goban* plateau)
         }
     }
 }
+
+bool Joueur::getPasse()
+{
+    return aPasse;
+}
