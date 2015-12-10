@@ -84,13 +84,15 @@ public :
 
 class Goban {
 private :
-    int taille; // ne sert à rien ?
+    int taille = 5 ; // ne sert à rien ?
     Pierre* goban[5][5];
 
 public :
     Goban ();
     void MiseAJour (Pierre* maPierre); //Pose d'une pierre sur le Goban
     Pierre* getPierre(coord case_pierre); // Récupère la pierre de la case
+    int get_taille();
+    void affichage();
 
 };
 
