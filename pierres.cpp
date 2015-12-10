@@ -135,11 +135,24 @@ void Groupe::fusionGroupe(Groupe* grp){
     vector<Pierre*> sndpierres = grp->getlistPierres();
     vector<coord> sndlibertes = grp->getlibertes();
     vector<coord> libertes_fusionnes(libertes.size()+sndlibertes.size());
-    vector<coord>::iterator it;
+
     /* fusion des libertés*/
     sort(libertes.begin(),libertes.end());
     sort(sndlibertes.begin(),sndlibertes.end());
 
+    for(vector<Pierre*>::iterator itpierre1 = pierres.begin();itpierre1<pierres.end();itpierre1++) {
+        coord c =(*itpierre1)->getCoord();
+        vector<coord>::iterator pos = find(sndlibertes.begin(),sndlibertes.end(),c);
+        sndlibertes.erase(pos);
+    }
+
+    for(vector<Pierre*>::iterator itpierre2 = sndpierres.begin();itpierre2<sndpierres.end();itpierre2++) {
+        coord c =(*itpierre2)->getCoord();
+        vector<coord>::iterator pos = find(libertes.begin(),libertes.end(),c);
+        libertes.erase(pos);
+    }
+
+    vector<coord>::iterator it;
     it=set_union(libertes.begin(),libertes.end(),sndlibertes.begin(),sndlibertes.end(),libertes_fusionnes.begin());
     libertes_fusionnes.resize(it-libertes_fusionnes.begin());
 
@@ -148,7 +161,7 @@ void Groupe::fusionGroupe(Groupe* grp){
     /*fusion des listes de pierres*/
     pierres.insert(pierres.end(),sndpierres.begin(), sndpierres.end());
 
-    grp = this;
+    *grp = *this;
 
 
 }
@@ -249,9 +262,9 @@ void Goban::test_adjacent(Pierre* maPierre,int decal_h, int decal_v){
     coord pierre_coord = maPierre->getCoord();
     int couleur_pierre = maPierre->getCouleur();
     Pierre* case_adjacente = goban[pierre_coord.x+decal_h][pierre_coord.y+decal_v];
-    int couleur_pierre_adjacente = case_adjacente->getCouleur();
 
     if (case_adjacente){ // Si la case n'est pas vide
+        int couleur_pierre_adjacente = case_adjacente->getCouleur();
         if(couleur_pierre==couleur_pierre_adjacente){ // Meme groupe
             case_adjacente->getGroupe()->fusionGroupe(maPierre->getGroupe());
         }

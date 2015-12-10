@@ -16,6 +16,7 @@ struct coord {
 
 int x;
 int y;
+/*opérateur de comparaisons*/
 
 bool operator <(const coord& a) const
 {
@@ -35,6 +36,10 @@ bool operator <(const coord& a) const
     }
 }
 
+bool operator ==(const coord& a) const{
+    return ((x==a.x)&&(y==a.y));
+
+}
 };
 
 //Pré-déclaration
@@ -81,6 +86,7 @@ public :
     //accesseur
     vector<Pierre*> getlistPierres();
     vector<coord> getlibertes();
+
 };
 
 class Goban {
