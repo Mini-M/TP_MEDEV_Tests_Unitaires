@@ -1,6 +1,11 @@
+#pragma once
 
+#include <iostream>
 #include <string>
 #include "structures_jeu.h"
+#include "regles.h"
+
+
 
 class Joueur
 {

@@ -1,6 +1,8 @@
 #include "joueur.h"
 
-Joueur :: Joueur(string color)
+using namespace std;
+
+Joueur :: Joueur(int color)
 {
     couleur=color;
     captures=0;
@@ -19,21 +21,21 @@ void Joueur :: jouer (Goban plateau)
 
     if (action=="jouer")
     {
-    int x,y;
-    cout<<"Entrer les coordonnees de la pierre"<<endl;
-    cin>>x>>y;
-    //a completer
-    if (size(plateau[x][y])==1)
+        int x,y;
+        cout<<"Entrer les coordonnees de la pierre"<<endl;
+        cin>>x>>y;
+        //a completer
+        if (coup_possible(x,y,plateau))
         {
-        cout<<"Case occupee"<<endl;
+        /*jouer le coup*/
         }
     }
     else if (action=="passer")
-    {
-    //a completer
-    }
+        {
+        //a completer
+        }
     else
-    {
-    cout<<"Action inconnue"<<endl;
-    }
+        {
+        cout<<"Action inconnue"<<endl;
+        }
 }
