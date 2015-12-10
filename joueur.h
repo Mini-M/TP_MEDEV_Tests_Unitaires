@@ -1,6 +1,11 @@
+#pragma once
 
+#include <iostream>
 #include <string>
 #include "structures_jeu.h"
+#include "regles.h"
+
+
 
 class Joueur
 {
@@ -11,7 +16,7 @@ private :
 public :
     Joueur(int color);
     ~Joueur();
-    void jouer (Goban plateau);
+    void jouer (Goban* plateau);
 
     //Fonctions de récupération
     int getColor();
