@@ -6,7 +6,7 @@ description : Contient les méthodes de pierre et groupe
 ============================================================================*/
 
 #include "structures_jeu.h"
-
+#include <iostream>
 /*==========================
         Struct Coord
 ==========================*/
@@ -140,6 +140,7 @@ void Groupe::miseAJourLibertes(){
         Classe Goban
 ==========================*/
 
+/*Accesseur*/
 Goban::Goban (){
 }
 
@@ -199,7 +200,38 @@ void Goban::MiseAJour(Pierre* maPierre){
 
 }
 
+/*fonction getPierre*/
 Pierre* Goban::getPierre(coord case_pierre){
     return goban[case_pierre.x][case_pierre.y];
+}
+
+/*fonction getTaille*/
+int Goban::get_taille(){
+    return taille;
+}
+
+/*fonction d'affichage du goban*/
+void Goban::affichage(){
+
+    cout <<"================="<<endl;
+    for (int i=0; i<5;i++){
+        for(int j=0; j<5;j++){
+            if(goban[i][j]){
+                if (goban[i][j]->getCouleur() ==0){
+                    cout <<" B ";
+                }
+                else{
+                    cout <<" N ";
+                }
+            }
+            else{
+                cout <<" . ";
+            }
+        }
+        cout <<endl;
+    }
+    cout<<"=================";
+
+
 }
 
