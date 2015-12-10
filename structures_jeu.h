@@ -55,8 +55,11 @@ public :
 
     //Constructeur
     Pierre (Goban* jeu,int couleur, int x, int y);
-    //Accesseur
+    //Accesseurs
     coord getCoord();
+    Groupe* getGroupe();
+    int getCouleur();
+
 
 
 };
@@ -82,7 +85,7 @@ public :
 class Goban {
 private :
     int taille; // ne sert à rien ?
-    Pierre* pierres_en_jeu[5][5];
+    Pierre* goban[5][5];
 
 public :
     Goban ();
