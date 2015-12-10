@@ -1,13 +1,13 @@
 #include "regles.h"
 
-bool case_libre(int x, int y, Goban plateau)
+bool case_libre(int x, int y, Goban* plateau)
 {
     bool estLibre;
     coord totest;
     totest.x = x;
     totest.y= y;
 
-    if (plateau.getPierre(totest))
+    if (plateau->getPierre(totest))
     {
         estLibre= false;
     }
@@ -18,23 +18,29 @@ bool case_libre(int x, int y, Goban plateau)
     return estLibre;
 }
 
-bool suicide (int x, int y, Goban plateau)
+bool suicide (int couleur, int x, int y, Goban* plateau)
 {
     bool estValide=false;
-    //poser la pierre
-    //pour chaque groupe autour tester libertes
-    //si groupe tue return true
-    //sinon tester libertes pierre posee
-        //si liberte >0 return true
-        //sinon return false
+    Pierre* pierre = new Pierre(plateau, 0, x,y);
+    vector<coord> libertes = pierre->getGroupe()->getlibertes();
+    if (sizeof(libertes)>0)
+        {
+        estValide=true;
+        }
+    else
+        {
+
+        }
+
+        //pour chaque groupe autour tester libertes
+            //si groupe tue return true
+            //sinon return false
     return estValide;
 }
 
-bool gestion_ko(int x, int y, Goban plateau)
+bool gestion_ko(Goban* plateau)
 {
     bool estValide=false;
-
-    //jouer coup
     std::ofstream ofs;
     ofs.open("tour.txt", ofstream::out | ofstream::trunc);
     //ecrire nouveau texte (boucle for)
@@ -56,11 +62,35 @@ bool gestion_ko(int x, int y, Goban plateau)
         estValide=false;
         }
     }
+    nouveau.close();
+    vieux.close();
     return estValide;
 }
 
-
-bool coup_possible(int x, int y, Goban plateau)
+//on teste le suicide puis le ko
+bool coup_possible(int couleur,int x, int y, Goban* plateau)
 {
-    return (case_libre(x,y, plateau)&&gestion_ko(x,y,plateau)&&(suicide(x,y,plateau)));
+    bool estValide;
+
+    if (suicide(couleur,x,y,plateau))
+        {
+        estValide=true;
+        }
+    else
+        {
+        if (gestion_ko(plateau))
+            {
+            estValide=true;
+            }
+        else
+            {
+            estValide=false;
+            }
+        }
+
+    if(!estValide)
+    {
+    //recreer le Goban selon l etat precedent
+    }
+    return estValide;
 }

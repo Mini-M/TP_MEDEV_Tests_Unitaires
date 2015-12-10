@@ -16,7 +16,7 @@ private :
 public :
     Joueur(int color);
     ~Joueur();
-    void jouer (Goban plateau);
+    void jouer (Goban* plateau);
 
     //Fonctions de récupération
     int getColor();

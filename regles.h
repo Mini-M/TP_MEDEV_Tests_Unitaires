@@ -4,7 +4,7 @@
 #include "structures_jeu.h"
 #include <fstream>
 
-bool case_libre (int x, int y, Goban plateau);
-bool gestion_ko (int x, int y, Goban plateau);
-bool suicide (int x, int y , Goban plateau);
-bool coup_possible (int x, int y, Goban plateau);
+bool case_libre (int x, int y, Goban* plateau);
+bool gestion_ko (Goban* plateau);
+bool suicide (int couleur, int x, int y , Goban* plateau);
+bool coup_possible (int couleur, int x, int y, Goban* plateau);
