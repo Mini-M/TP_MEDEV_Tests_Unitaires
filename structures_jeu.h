@@ -27,6 +27,8 @@ public :
 
     //Constructeur
     Pierre (Goban* jeu,int couleur, int x, int y);
+    //Accesseur
+    coord getCoord();
 
 
 };
@@ -54,5 +56,6 @@ private :
 public :
     Goban (int taille);
     void MiseAJour (Pierre* maPierre);
+    Pierre* getPierre(coord case_pierre); // Récupère la pierre de la case
 
 };
