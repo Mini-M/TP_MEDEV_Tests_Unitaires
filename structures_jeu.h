@@ -74,6 +74,7 @@ private :
 
 public :
     Groupe (Goban* jeu,Pierre* maPierre );
+    void test_case_adjacent(Pierre* maPierre,int decal_x,int decal_y);
     void fusionGroupe (Groupe* grp);
     void miseAJourLibertes ();
 
@@ -84,12 +85,13 @@ public :
 
 class Goban {
 private :
-    int taille = 5 ; // ne sert à rien ?
-    Pierre* goban[5][5];
+    static const int taille = 5 ; // ne sert à rien ?
+    Pierre* goban[taille][taille];
 
 public :
     Goban ();
     void MiseAJour (Pierre* maPierre); //Pose d'une pierre sur le Goban
+    void test_adjacent(Pierre* maPierre,int decal_h, int decal_v);
     Pierre* getPierre(coord case_pierre); // Récupère la pierre de la case
     int get_taille();
     void affichage();

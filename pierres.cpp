@@ -54,43 +54,79 @@ Groupe::Groupe (Goban* jeu,Pierre* maPierre ){
     //Récupère les libertés
     libertes.clear();
     coord pierre_coord = maPierre->getCoord();
-    Pierre* case_adjacente;
 
-    coord case_droite = pierre_coord;
-    coord case_gauche = pierre_coord;
-    coord case_haut = pierre_coord;
-    coord case_bas = pierre_coord;
-    case_droite.x++;
-    case_gauche.x--;
-    case_haut.y--;
-    case_bas.y++;
 
-    case_adjacente = jeu->getPierre(case_droite);
+    int taille = jeu->get_taille();
 
-    if (!case_adjacente){ // Si la case est vide
-        libertes.push_back(case_droite);
+    if ((pierre_coord.x == 0)&&(pierre_coord.y==0)){
+            test_case_adjacent(maPierre,1,0);
+            test_case_adjacent(maPierre,0,1);
+    }
+    else if((pierre_coord.x == taille-1)&&(pierre_coord.y==0)){
+
+            test_case_adjacent(maPierre,-1,0);
+            test_case_adjacent(maPierre,0,1);
+    }
+    else if((pierre_coord.x == 0)&&(pierre_coord.y==taille-1)){
+
+            test_case_adjacent(maPierre,1,0);
+            test_case_adjacent(maPierre,0,-1);
+    }
+    else if((pierre_coord.x == taille-1)&&(pierre_coord.y==taille-1)){
+
+            test_case_adjacent(maPierre,-1,0);
+            test_case_adjacent(maPierre,0,-1);
+    }
+    else if (pierre_coord.x == 0){
+
+             test_case_adjacent(maPierre,1,0);
+            test_case_adjacent(maPierre,0,-1);
+            test_case_adjacent(maPierre,0,1);
+
+
+    }
+    else if (pierre_coord.x == taille-1){
+
+             test_case_adjacent(maPierre,-1,0);
+            test_case_adjacent(maPierre,0,-1);
+            test_case_adjacent(maPierre,0,1);
+
+    }
+    else if (pierre_coord.y == 0){
+
+            test_case_adjacent(maPierre,0,1);
+            test_case_adjacent(maPierre,1,0);
+            test_case_adjacent(maPierre,-1,0);
+
+    }
+    else if (pierre_coord.y == taille-1){
+
+            test_case_adjacent(maPierre,0,-1);
+            test_case_adjacent(maPierre,1,0);
+            test_case_adjacent(maPierre,-1,0);
+
+    }
+    else{
+            test_case_adjacent(maPierre,0,1);
+            test_case_adjacent(maPierre,0,-1);
+            test_case_adjacent(maPierre,1,0);
+            test_case_adjacent(maPierre,-1,0);
+
     }
 
-    case_adjacente = jeu->getPierre(case_gauche);
-
-    if (!case_adjacente){ // Si la case est vide
-        libertes.push_back(case_gauche);
-    }
-
-    case_adjacente = jeu->getPierre(case_haut);
-
-    if (!case_adjacente){ // Si la case est vide
-        libertes.push_back(case_haut);
-    }
-
-    case_adjacente = jeu->getPierre(case_bas);
-
-    if (!case_adjacente){ // Si la case est vide
-        libertes.push_back(case_bas);
-    }
 
 }
 
+void Groupe::test_case_adjacent(Pierre* maPierre,int decal_x,int decal_y){
+    coord case_pierre_adjacente = maPierre->getCoord();
+    case_pierre_adjacente.x += decal_x;
+    case_pierre_adjacente.y += decal_y;
+    Pierre* case_adjacente = jeu->getPierre(case_pierre_adjacente);
+
+    if (!case_adjacente){ // Si la case est vide
+        libertes.push_back(case_pierre_adjacente);
+    }
+}
 //Fonction Fusionne deux groupes
 void Groupe::fusionGroupe(Groupe* grp){
 
@@ -146,13 +182,71 @@ Goban::Goban (){
 
 void Goban::MiseAJour(Pierre* maPierre){
     coord pierre_coord = maPierre->getCoord();
-    int couleur_pierre = maPierre->getCouleur();
     goban[pierre_coord.x][pierre_coord.y]= maPierre;
 
     //Cette pierre appartient-elle a un groupe! Ou bien réduit-elle les libertes d'un groupe adverse.
-    Pierre* case_adjacente;
+    if ((pierre_coord.x == 0)&&(pierre_coord.y==0)){
+            test_adjacent(maPierre,1,0);
+            test_adjacent(maPierre,0,1);
+    }
+    else if((pierre_coord.x == taille-1)&&(pierre_coord.y==0)){
 
-    case_adjacente = goban[pierre_coord.x+1][pierre_coord.y];
+            test_adjacent(maPierre,-1,0);
+            test_adjacent(maPierre,0,1);
+    }
+    else if((pierre_coord.x == 0)&&(pierre_coord.y==taille-1)){
+
+            test_adjacent(maPierre,1,0);
+            test_adjacent(maPierre,0,-1);
+    }
+    else if((pierre_coord.x == taille-1)&&(pierre_coord.y==taille-1)){
+
+            test_adjacent(maPierre,-1,0);
+            test_adjacent(maPierre,0,-1);
+    }
+    else if (pierre_coord.x == 0){
+
+             test_adjacent(maPierre,1,0);
+            test_adjacent(maPierre,0,-1);
+            test_adjacent(maPierre,0,1);
+
+
+    }
+    else if (pierre_coord.x == taille-1){
+
+             test_adjacent(maPierre,-1,0);
+            test_adjacent(maPierre,0,-1);
+            test_adjacent(maPierre,0,1);
+
+    }
+    else if (pierre_coord.y == 0){
+
+            test_adjacent(maPierre,0,1);
+            test_adjacent(maPierre,1,0);
+            test_adjacent(maPierre,-1,0);
+
+    }
+    else if (pierre_coord.y == taille-1){
+
+            test_adjacent(maPierre,0,-1);
+            test_adjacent(maPierre,1,0);
+            test_adjacent(maPierre,-1,0);
+
+    }
+    else{
+            test_adjacent(maPierre,0,1);
+            test_adjacent(maPierre,0,-1);
+            test_adjacent(maPierre,1,0);
+            test_adjacent(maPierre,-1,0);
+
+    }
+}
+
+void Goban::test_adjacent(Pierre* maPierre,int decal_h, int decal_v){
+
+    coord pierre_coord = maPierre->getCoord();
+    int couleur_pierre = maPierre->getCouleur();
+    Pierre* case_adjacente = goban[pierre_coord.x+decal_h][pierre_coord.y+decal_v];
     int couleur_pierre_adjacente = case_adjacente->getCouleur();
 
     if (case_adjacente){ // Si la case n'est pas vide
@@ -163,40 +257,6 @@ void Goban::MiseAJour(Pierre* maPierre){
             case_adjacente->getGroupe()->miseAJourLibertes();
         }
     }
-
-    case_adjacente = goban[pierre_coord.x-1][pierre_coord.y];
-    if (case_adjacente){ // Si la case n'est pas vide
-        if(couleur_pierre==couleur_pierre_adjacente){ // Meme groupe
-            case_adjacente->getGroupe()->fusionGroupe(maPierre->getGroupe());
-        }
-        else{ // Sinon on touche une groupe adversaire
-            case_adjacente->getGroupe()->miseAJourLibertes();
-        }
-    }
-
-
-    case_adjacente = goban[pierre_coord.x][pierre_coord.y+1];
-    if (case_adjacente){ // Si la case n'est pas vide
-        if(couleur_pierre==couleur_pierre_adjacente){ // Meme groupe
-            case_adjacente->getGroupe()->fusionGroupe(maPierre->getGroupe());
-        }
-        else{ // Sinon on touche une groupe adversaire
-            case_adjacente->getGroupe()->miseAJourLibertes();
-        }
-    }
-
-
-    case_adjacente = goban[pierre_coord.x][pierre_coord.y-1];
-    if (case_adjacente){ // Si la case n'est pas vide
-        if(couleur_pierre==couleur_pierre_adjacente){ // Meme groupe
-            case_adjacente->getGroupe()->fusionGroupe(maPierre->getGroupe());
-        }
-        else{ // Sinon on touche une groupe adversaire
-            case_adjacente->getGroupe()->miseAJourLibertes();
-        }
-    }
-
-
 
 }
 
