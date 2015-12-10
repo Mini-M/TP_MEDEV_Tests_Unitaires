@@ -93,7 +93,49 @@ TEST_F(gobanTest1, TestLibertes3) {
 }
 
 
+/*Deuxième série de tests*/
 
+class gobanTest2 : public ::testing::Test {
+protected :
+Goban* jeu;
+Pierre* maPierre1,*maPierre2;
+int taille_groupe,taille_groupe2, nb_libertes ;
+virtual void SetUp () {
+    jeu = new Goban();
+
+    maPierre1 = new Pierre (jeu,0,2,2);
+    maPierre2 = new Pierre (jeu,0,2,3);
+    jeu->MiseAJour(maPierre1);
+    jeu->MiseAJour(maPierre2);
+
+    taille_groupe = maPierre1->getGroupe()->getlistPierres().size();
+    taille_groupe2 = maPierre2->getGroupe()->getlistPierres().size();
+    nb_libertes = maPierre1->getGroupe()->getlibertes().size();
+
+
+}
+
+
+};
+
+/*Un groupe de deux pierres est bien formé */
+TEST_F(gobanTest2, TestGroupNb) {
+
+    EXPECT_EQ (2,taille_groupe);
+
+}
+TEST_F(gobanTest2, TestGroupNb2) {
+
+    EXPECT_EQ (2,taille_groupe2);
+
+}
+/*Un groupe de deux pierres au centre a bien 8 libertes */
+
+TEST_F(gobanTest2, TestGroupLibertes) {
+
+    EXPECT_EQ (6,nb_libertes);
+
+}
 int main(int argc, char **argv) {
 
 
