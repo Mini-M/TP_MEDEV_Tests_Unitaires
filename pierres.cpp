@@ -124,7 +124,9 @@ void Groupe::test_case_adjacent(Pierre* maPierre,int decal_x,int decal_y){
     Pierre* case_adjacente = jeu->getPierre(case_pierre_adjacente);
 
     if (!case_adjacente){ // Si la case est vide
+
         libertes.push_back(case_pierre_adjacente);
+
     }
 }
 //Fonction Fusionne deux groupes

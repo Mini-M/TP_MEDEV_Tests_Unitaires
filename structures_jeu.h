@@ -86,7 +86,7 @@ public :
 class Goban {
 private :
     static const int taille = 5 ; // ne sert à rien ?
-    Pierre* goban[taille][taille];
+    Pierre* goban[taille][taille] = {{}};
 
 public :
     Goban ();
