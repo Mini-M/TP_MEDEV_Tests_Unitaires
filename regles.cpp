@@ -29,12 +29,36 @@ bool suicide (int couleur, int x, int y, Goban* plateau)
         }
     else
         {
+        coord pierre_coord;
+        pierre_coord.x=x;
+        pierre_coord.y=y;
+        coord case_droite = pierre_coord;
+        coord case_gauche = pierre_coord;
+        coord case_haut = pierre_coord;
+        coord case_bas = pierre_coord;
+        case_droite.x++;
+        case_gauche.x--;
+        case_haut.y--;
+        case_bas.y++;
+        if(sizeof(plateau->getPierre(case_droite)->getGroupe()->getlibertes())==0)
+            {
+            estValide=true;
+
+            }
+        if(sizeof(plateau->getPierre(case_gauche)->getGroupe()->getlibertes())==0)
+            {
+            estValide=true;
+            }
+        if(sizeof(plateau->getPierre(case_haut)->getGroupe()->getlibertes())==0)
+            {
+            estValide=true;
+            }
+        if(sizeof(plateau->getPierre(case_bas)->getGroupe()->getlibertes())==0)
+            {
+            estValide=true;
+            }
 
         }
-
-        //pour chaque groupe autour tester libertes
-            //si groupe tue return true
-            //sinon return false
     return estValide;
 }
 
@@ -42,7 +66,7 @@ bool gestion_ko(Goban* plateau)
 {
     bool estValide=false;
     std::ofstream ofs;
-    ofs.open("tour.txt", ofstream::out | ofstream::trunc);
+    ofs.open("tour.txt", ofstream::out | ofstream::trunc);//efface le contenu du texte
     //ecrire nouveau texte (boucle for)
     ofs.close();
 
