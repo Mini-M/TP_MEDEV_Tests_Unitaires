@@ -5,6 +5,7 @@
 #include <fstream>
 
 void ecriture_texte (string txtname,Goban* plateau);
+void reecriture_goban (string txtname, Goban* plateau);
 bool case_libre (int x, int y, Goban* plateau);
 bool suicide (int couleur, int x, int y , Goban* plateau);
 bool gestion_ko (Goban* plateau);
