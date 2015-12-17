@@ -4,7 +4,7 @@
 void ecriture_texte(string txtname, Goban* plateau)
 {
     ofstream ofs;
-    ofs.open(txtname,ofstream::out(ofstream::trunc));
+    ofs.open(txtname,ofstream::out|ofstream::trunc);
     coord towrite;
     for(int j=0;j<plateau->get_taille();j++)
     {
@@ -45,19 +45,15 @@ bool case_libre(int x, int y, Goban* plateau)
         else{
             estLibre= true;
         }
-
-
-    if (plateau->getPierre(totest))
-    {
-        estLibre= false;
-
     }
     else{
         estLibre = false;
-
     }
+
     return estLibre;
+
 }
+
 
 /* Teste si la pierre posée est un suicide (coup invalide)
 ou si elle capture un groupe (coup valide) */
@@ -111,7 +107,7 @@ bool gestion_ko(Goban* plateau)
 {
     bool estValide=false;
     //Actualisation du fichier actuel du plateau
-    ecriture_texte("tour.txt");
+    ecriture_texte("tour.txt",plateau);
     //Comparaison du fichier actuel avec celui de deux tours avant
     ifstream nouveau("tour.txt");
     ifstream vieux("tour_2.txt");
