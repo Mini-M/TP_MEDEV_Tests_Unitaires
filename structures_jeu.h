@@ -67,7 +67,7 @@ public :
     //setters
     void setGroupe(Groupe* grp);
 
-
+    ~Pierre();
 };
 
 class Groupe {
@@ -105,6 +105,7 @@ public :
     int get_taille();
     void affichage();
     void reinitialise();
+    void delete_stone(coord c);
 
 
 };

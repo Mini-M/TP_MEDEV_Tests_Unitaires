@@ -35,7 +35,7 @@ void reecriture_goban(string txtname, Goban* plateau)
 
     if(fichier)  // si l'ouverture a réussi
         {
-            fichier.getline(lecture);
+//            fichier.getline(lecture);
         }
         else
         {
