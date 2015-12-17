@@ -1,22 +1,33 @@
 #include "regles.h"
 
+/* Teste si une case est libre*/
 bool case_libre(int x, int y, Goban* plateau)
 {
     bool estLibre;
     coord totest;
     totest.x = x;
     totest.y= y;
+    int taille = plateau->get_taille();
+    if ((x>=0)&&(x<taille)&&(y>=0)&&(y<taille)){
 
-    if (plateau->getPierre(totest))
-    {
-        estLibre= false;
+        if (plateau->getPierre(totest))
+        {
+            estLibre= false;
+        }
+        else{
+            estLibre= true;
+        }
+
     }
-    else
-    {
-        estLibre= true;
+    else{
+        estLibre = false;
+
     }
     return estLibre;
 }
+
+/* Teste si la pierre posée est un suicide (coup invalide)
+ou si elle capture un groupe (coup valide) */
 
 bool suicide (int couleur, int x, int y, Goban* plateau)
 {

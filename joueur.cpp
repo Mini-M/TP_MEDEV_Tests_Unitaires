@@ -32,6 +32,7 @@ void Joueur :: jouer (Goban* plateau)
         {
             if(coup_possible(couleur,x,y,plateau))
             {
+            plateau->MiseAJour(new Pierre(plateau,couleur,x,y));
             cout<<"Le coup ("<<x<<","<<y<<") a ete joue"<<endl;
             aJoue=true;
             }

@@ -40,6 +40,13 @@ return grpAssoc;
 int Pierre::getCouleur(){
     return couleur;
 }
+
+/*Setters*/
+
+void Pierre::setGroupe(Groupe* grp){
+        grpAssoc = grp;
+}
+
 /*==========================
         Classe Groupe
 ==========================*/
@@ -140,18 +147,21 @@ void Groupe::fusionGroupe(Groupe* grp){
     sort(libertes.begin(),libertes.end());
     sort(sndlibertes.begin(),sndlibertes.end());
 
+    /*On élimine les pierres du premier groupe dans la liste des libertés du second groupe*/
     for(vector<Pierre*>::iterator itpierre1 = pierres.begin();itpierre1<pierres.end();itpierre1++) {
         coord c =(*itpierre1)->getCoord();
         vector<coord>::iterator pos = find(sndlibertes.begin(),sndlibertes.end(),c);
-        sndlibertes.erase(pos);
+        if (pos != sndlibertes.end()) sndlibertes.erase(pos);
     }
 
+    /*On élimine les pierres du second groupe dans la liste des libertés du premier groupe*/
     for(vector<Pierre*>::iterator itpierre2 = sndpierres.begin();itpierre2<sndpierres.end();itpierre2++) {
         coord c =(*itpierre2)->getCoord();
         vector<coord>::iterator pos = find(libertes.begin(),libertes.end(),c);
-        libertes.erase(pos);
+        if (pos != libertes.end()) libertes.erase(pos);
     }
 
+    /* on fusionne les libertés*/
     vector<coord>::iterator it;
     it=set_union(libertes.begin(),libertes.end(),sndlibertes.begin(),sndlibertes.end(),libertes_fusionnes.begin());
     libertes_fusionnes.resize(it-libertes_fusionnes.begin());
@@ -161,9 +171,16 @@ void Groupe::fusionGroupe(Groupe* grp){
     /*fusion des listes de pierres*/
     pierres.insert(pierres.end(),sndpierres.begin(), sndpierres.end());
 
-    *grp = *this;
+    grp->updateGroup(this);
 
 
+}
+
+void Groupe::updateGroup(Groupe* grp){
+
+    for(vector<Pierre*>::iterator itpierre = pierres.begin();itpierre<pierres.end();itpierre++) {
+        (*itpierre)->setGroupe(grp);
+    }
 }
 
 /*Accesseurs Groupe*/
@@ -289,7 +306,9 @@ int Goban::get_taille(){
 void Goban::affichage(){
 
     cout <<"================="<<endl;
+    cout <<"  0  1  2  3  4  "<<endl;
     for (int i=0; i<5;i++){
+        cout << i;
         for(int j=0; j<5;j++){
             if(goban[i][j]){
                 if (goban[i][j]->getCouleur() ==0){
@@ -305,7 +324,7 @@ void Goban::affichage(){
         }
         cout <<endl;
     }
-    cout<<"=================";
+    cout<<"================="<< endl;;
 
 
 }

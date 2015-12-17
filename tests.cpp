@@ -119,7 +119,8 @@ virtual void SetUp () {
 };
 
 /*Un groupe de deux pierres est bien formé */
-TEST_F(gobanTest2, TestGroupNb) {
+TEST_F(gobanTest2, TestGroupNb)
+ {
 
     EXPECT_EQ (2,taille_groupe);
 

@@ -64,7 +64,8 @@ public :
     coord getCoord();
     Groupe* getGroupe();
     int getCouleur();
-
+    //setters
+    void setGroupe(Groupe* grp);
 
 
 };
@@ -81,6 +82,7 @@ public :
     Groupe (Goban* jeu,Pierre* maPierre );
     void test_case_adjacent(Pierre* maPierre,int decal_x,int decal_y);
     void fusionGroupe (Groupe* grp);
+    void updateGroup(Groupe* grp);
     void miseAJourLibertes ();
 
     //accesseur
