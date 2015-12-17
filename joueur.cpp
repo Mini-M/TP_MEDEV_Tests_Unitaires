@@ -30,7 +30,7 @@ void Joueur :: jouer (Goban* plateau)
 
         if (case_libre(x,y,plateau))
         {
-            if(coup_possible(couleur,x,y,plateau))
+            if(coup_possible(couleur,x,y,plateau)&&suicide(couleur,x,y,plateau))
             {
             plateau->MiseAJour(new Pierre(plateau,couleur,x,y));
             cout<<"Le coup ("<<x<<","<<y<<") a ete joue"<<endl;

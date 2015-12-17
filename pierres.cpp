@@ -183,6 +183,10 @@ void Groupe::updateGroup(Groupe* grp){
     }
 }
 
+void Groupe::destroy(){
+    pierres.clear();
+}
+
 /*Accesseurs Groupe*/
 
 vector<Pierre*> Groupe::getlistPierres(){
@@ -274,6 +278,7 @@ void Goban::MiseAJour(Pierre* maPierre){
     }
 }
 
+/* On regarde la case adjacente et on agit en conséquence (fusion de groupes, réduction de libertés)*/
 void Goban::test_adjacent(Pierre* maPierre,int decal_h, int decal_v){
 
     coord pierre_coord = maPierre->getCoord();
@@ -285,7 +290,7 @@ void Goban::test_adjacent(Pierre* maPierre,int decal_h, int decal_v){
         if(couleur_pierre==couleur_pierre_adjacente){ // Meme groupe
             case_adjacente->getGroupe()->fusionGroupe(maPierre->getGroupe());
         }
-        else{ // Sinon on touche une groupe adversaire
+        else{ // Sinon on touche un groupe adversaire
             case_adjacente->getGroupe()->miseAJourLibertes();
         }
     }
@@ -307,9 +312,9 @@ void Goban::affichage(){
 
     cout <<"================="<<endl;
     cout <<"  0  1  2  3  4  "<<endl;
-    for (int i=0; i<5;i++){
+    for (int i=0; i<taille;i++){
         cout << i;
-        for(int j=0; j<5;j++){
+        for(int j=0; j<taille;j++){
             if(goban[i][j]){
                 if (goban[i][j]->getCouleur() ==0){
                     cout <<" B ";
@@ -329,3 +334,11 @@ void Goban::affichage(){
 
 }
 
+void Goban::reinitialise(){
+
+       for (int i=0; i<taille;i++){
+        for(int j=0; j<taille;j++){
+            goban[i][j]=NULL;
+            }
+        }
+}

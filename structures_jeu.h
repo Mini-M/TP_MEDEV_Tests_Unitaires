@@ -84,6 +84,7 @@ public :
     void fusionGroupe (Groupe* grp);
     void updateGroup(Groupe* grp);
     void miseAJourLibertes ();
+    void destroy();
 
     //accesseur
     vector<Pierre*> getlistPierres();
@@ -103,6 +104,8 @@ public :
     Pierre* getPierre(coord case_pierre); // Récupère la pierre de la case
     int get_taille();
     void affichage();
+    void reinitialise();
+
 
 };
 
