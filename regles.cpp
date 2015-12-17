@@ -26,6 +26,37 @@ void ecriture_texte(string txtname, Goban* plateau)
     ofs.close();
 }
 
+void reecriture_goban(string txtname, Goban* plateau)
+{
+    string lecture;
+    ifstream fichier;
+
+    fichier.open(txtname, ios::in);
+
+    if(fichier)  // si l'ouverture a réussi
+        {
+            fichier.getline(lecture);
+        }
+        else
+        {
+            cerr << "Impossible d'ouvrir le fichier !" << endl;
+        }
+
+    int numero_caractere;
+
+    for(int j=0;j<plateau->get_taille();j++)
+    {
+        for(int i=0; i<plateau->get_taille();i++)
+        {
+            numero_caractere=plateau->get_taille()*j+i;
+            //completer en mettant dans la case i j lecture[numero_caractere]
+        }
+    }
+
+    fichier.close();  // on ferme le fichier
+
+}
+
 /* Teste si une case est libre*/
 
 bool case_libre(int x, int y, Goban* plateau)
