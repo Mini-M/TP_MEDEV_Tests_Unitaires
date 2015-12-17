@@ -1,5 +1,29 @@
 #include "regles.h"
 
+void ecriture_texte(string txtname, Goban* plateau)
+{
+    ofstream ofs;
+    ofs.open(txtname,ofstream::out(ofstream::trunc));
+    coord towrite;
+    for(int j=0;j<plateau->get_taille();j++)
+    {
+        for(int i=0; i<plateau->get_taille();i++)
+        {
+            towrite.x=i;
+            towrite.y=j;
+            if(sizeof(plateau->getPierre(towrite))==0)
+            {
+                ofs<<".";
+            }
+            else
+            {
+                ofs<<plateau->getPierre(towrite)->getCouleur();
+            }
+
+        }
+    }
+    ofs.close();
+}
 bool case_libre(int x, int y, Goban* plateau)
 {
     bool estLibre;
@@ -67,11 +91,9 @@ bool suicide (int couleur, int x, int y, Goban* plateau)
 bool gestion_ko(Goban* plateau)
 {
     bool estValide=false;
-    std::ofstream ofs;
-    ofs.open("tour.txt", ofstream::out | ofstream::trunc);//efface le contenu du texte
-    //ecrire nouveau texte (boucle for)
-    ofs.close();
-
+    //Actualisation du fichier actuel du plateau
+    ecriture_texte("tour.txt");
+    //Comparaison du fichier actuel avec celui de deux tours avant
     ifstream nouveau("tour.txt");
     ifstream vieux("tour_2.txt");
     while((!nouveau.eof())&&(!vieux.eof()))
@@ -81,12 +103,12 @@ bool gestion_ko(Goban* plateau)
         getline(vieux,line2);
         if(line==line2)
         {
-        estValide=true;
+        estValide=false;//2 fichiers identiques : c'est un ko
+        cout<<"Ce coup est un ko"<<endl;
         }
         else
         {
-        estValide=false;
-        cout<<"Ce coup est un ko"<<endl;
+        estValide=true;//fichiers differents donc coup valide
         }
     }
     nouveau.close();
