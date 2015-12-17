@@ -35,10 +35,7 @@ void Joueur :: jouer (Goban* plateau)
             cout<<"Le coup ("<<x<<","<<y<<") a ete joue"<<endl;
             aJoue=true;
             }
-            else
-            {
-            cout<<"Le coup ("<<x<<","<<y<<") est invalide"<<endl;
-            }
+
         }
     }
     else if (action=="passer")

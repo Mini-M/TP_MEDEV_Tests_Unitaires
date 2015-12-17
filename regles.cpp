@@ -10,6 +10,7 @@ bool case_libre(int x, int y, Goban* plateau)
     if (plateau->getPierre(totest))
     {
         estLibre= false;
+        cout<<"La case ("<<x<<","<<y<<") est deja occupee"<<endl;
     }
     else
     {
@@ -59,6 +60,7 @@ bool suicide (int couleur, int x, int y, Goban* plateau)
             }
 
         }
+    if (estValide==false){cout<<"Ne vous suicidez pas !"<<endl;}
     return estValide;
 }
 
@@ -84,6 +86,7 @@ bool gestion_ko(Goban* plateau)
         else
         {
         estValide=false;
+        cout<<"Ce coup est un ko"<<endl;
         }
     }
     nouveau.close();
