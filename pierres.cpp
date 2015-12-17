@@ -47,6 +47,9 @@ void Pierre::setGroupe(Groupe* grp){
         grpAssoc = grp;
 }
 
+Pierre::~Pierre(){
+}
+
 /*==========================
         Classe Groupe
 ==========================*/
@@ -184,7 +187,12 @@ void Groupe::updateGroup(Groupe* grp){
 }
 
 void Groupe::destroy(){
-    pierres.clear();
+    vector<Pierre*>::iterator it;
+    for(it=pierres.begin();it<pierres.end();it++){
+        coord c = (*it)->getCoord();
+        jeu->delete_stone(c);
+
+    }
 }
 
 /*Accesseurs Groupe*/
@@ -291,7 +299,13 @@ void Goban::test_adjacent(Pierre* maPierre,int decal_h, int decal_v){
             case_adjacente->getGroupe()->fusionGroupe(maPierre->getGroupe());
         }
         else{ // Sinon on touche un groupe adversaire
-            case_adjacente->getGroupe()->miseAJourLibertes();
+            Groupe* temp = case_adjacente->getGroupe();
+            temp->miseAJourLibertes();
+            cout << temp->getlibertes().size()<<endl;
+            if (temp->getlibertes().size()==0){
+                temp->destroy();
+
+            }
         }
     }
 
@@ -331,6 +345,13 @@ void Goban::affichage(){
     }
     cout<<"================="<< endl;;
 
+
+}
+
+void Goban::delete_stone(coord c){
+
+    delete goban[c.x][c.y];
+    goban[c.x][c.y]=NULL;
 
 }
 

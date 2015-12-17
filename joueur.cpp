@@ -20,9 +20,16 @@ void Joueur :: jouer (Goban* plateau)
     while(!aJoue)
     {
     string action ;
+    if (couleur==0){
+        cout << " Action Joueur Blanc:"<<endl;
+    }
+    else{
+            cout << " Action Joueur Noir"<<endl;
+
+    }
     cin >> action;
 
-    if (action=="jouer")
+    if (action=="j")
     {
         int x,y;
         cout<<"Entrer les coordonnees de la pierre"<<endl;
@@ -39,7 +46,7 @@ void Joueur :: jouer (Goban* plateau)
 
         }
     }
-    else if (action=="passer")
+    else if (action=="p")
         {
         aJoue=true;
         }

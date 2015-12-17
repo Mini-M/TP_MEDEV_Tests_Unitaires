@@ -49,8 +49,8 @@ int main ()
     {
     plateau->affichage();
 
-    if(tour%2) {Blanc->jouer(plateau);}
-    else {Noir->jouer(plateau);}
+    if(tour%2) {Noir->jouer(plateau);}
+    else {Blanc->jouer(plateau);}
     tour++;
     }
     return 0;
