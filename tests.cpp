@@ -1,4 +1,5 @@
 #include "structures_jeu.h"
+#include "regles.h"
 #include "gtest/gtest.h"
 #include <cmath>
 #include <stdio.h>
@@ -137,6 +138,46 @@ TEST_F(gobanTest2, TestGroupLibertes) {
     EXPECT_EQ (6,nb_libertes);
 
 }
+
+/* TROISIEME SERIES DE TESTS */
+
+// Test pour la fonction de détection des cases vides
+
+class gobanTest3 : public ::testing::Test {
+protected :
+Goban* jeu;
+Pierre* maPierre1;
+bool caselibre;
+bool caseoccupee;
+
+virtual void SetUp () {
+    jeu = new Goban();
+
+    maPierre1 = new Pierre (jeu,0,2,2);
+    jeu->MiseAJour(maPierre1);
+
+    caselibre = case_libre(1, 1, jeu); // la case est sensé être vide
+    caseoccupee = case_libre(2,2,jeu); // la case est sensé être occupée
+
+}
+
+
+};
+
+// Test pour vérifier si la case est déclarée comme vide
+TEST_F(gobanTest3, TestOccupation) {
+
+    EXPECT_EQ (true,caselibre);
+
+}
+
+// Test pour vérifier si la case est déclarée comme occupée
+TEST_F(gobanTest3, TestOccupation2) {
+
+    EXPECT_EQ (false,caseoccupee);
+
+}
+
 int main(int argc, char **argv) {
 
 
